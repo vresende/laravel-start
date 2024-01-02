@@ -13,6 +13,7 @@ export default defineConfig({
             '@': '/resources/js',
             '~bootstrap': '/node_modules/bootstrap/',
             '~bootstrap-icons': '/node_modules/bootstrap-icons/',
+            '~choices.js': '/node_modules/choices.js/',
         },
     },
 });
