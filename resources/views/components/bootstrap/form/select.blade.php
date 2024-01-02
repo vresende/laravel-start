@@ -1,6 +1,6 @@
 @props(['id', 'name', 'label', 'options', 'selected' => null])
 <div class="form-group">
-    <label for="{{ $id }}" class="form-label">Aqui {{ __($label) }}</label> <!-- Tradução para o label -->
+    <label for="{{ $id }}" class="form-label">{{ __($label) }}</label> <!-- Tradução para o label -->
 
     <select
         {{ $attributes->merge(['class' => 'form-select js-choice'])->class([$errors->has($name) ? 'is-invalid' : '']) }}
