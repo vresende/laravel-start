@@ -6,7 +6,7 @@
         type="color"
         id="{{ $id }}"
         name="{{ $name }}"
-        {{ $attributes->merge(['class' => 'form-control'])->class([$errors->has($name) ? 'is-invalid' : '']) }}
+        {{ $attributes->merge(['class' => 'form-control form-control-color'])->class([$errors->has($name) ? 'is-invalid' : '']) }}
     >
     @error($name)
     <div class="invalid-feedback">{{ __($message) }}</div>
