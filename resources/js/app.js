@@ -51,4 +51,22 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+//TOAST
+
+document.addEventListener('DOMContentLoaded', function() {
+    window.addEventListener('toast', event => {
+        Swal.fire({
+            title: event.detail.title || 'Atenção',
+            text: event.detail.text || '',
+            icon: event.detail.icon || 'info',
+            timer: event.detail.timer || 3000,
+            toast: true,
+            position: event.detail.position || 'top-end',
+            showConfirmButton: false,
+            timerProgressBar: true,
+        });
+    });
+});
+
+
 
