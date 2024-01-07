@@ -32,7 +32,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     return x[1].toUpperCase();
                 });
                 try {
-                    console.log(option)
                     // Tentar converter a string JSON em um objeto JavaScript
                     config[option] = JSON.parse(attrs[i].value);
                 } catch (e) {
@@ -41,7 +40,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
         }
-        console.log(Portuguese)
         Flatpickr.defaultConfig = Object.assign(Flatpickr.defaultConfig, {
             locale: Portuguese,
             // dateFormat: "d/m/Y",
@@ -68,5 +66,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+import AOS from 'aos';
+
+AOS.init();
 
 

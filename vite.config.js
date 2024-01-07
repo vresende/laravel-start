@@ -15,6 +15,7 @@ export default defineConfig({
             '~bootstrap-icons': '/node_modules/bootstrap-icons/',
             '~choices.js': '/node_modules/choices.js/',
             '~flatpickr': '/node_modules/flatpickr/',
+            '~aos': '/node_modules/aos/',
         },
     },
 });
