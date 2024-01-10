@@ -1,7 +1,8 @@
 import './bootstrap';
 import '~bootstrap';
 import Choices from "choices.js";
-
+import Swiper from "swiper/bundle";
+window.Swiper = Swiper;
 document.addEventListener('DOMContentLoaded', function () {
     var elements = document.querySelectorAll('.js-choice');
     if (elements.length > 0) {
