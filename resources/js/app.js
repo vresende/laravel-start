@@ -66,8 +66,24 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// AOS - Animate elements html
 import AOS from 'aos';
-
 AOS.init();
 
+import Zoomist from "zoomist";
+document.addEventListener('DOMContentLoaded', function () {
+    var elements = document.querySelectorAll('.zoomist-container');
+    if (elements.length > 0) {
+        elements.forEach(function (element) {
+            new Zoomist(element, {
+                maxScale: 4,
+                bounds: true,
+                // if you need slider
+                slider: true,
+                // if you need zoomer
+                zoomer: true
+            });
+        });
+    }
+});
 

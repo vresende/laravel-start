@@ -16,6 +16,7 @@ export default defineConfig({
             '~choices.js': '/node_modules/choices.js/',
             '~flatpickr': '/node_modules/flatpickr/',
             '~aos': '/node_modules/aos/',
+            '~zoomist': '/node_modules/zoomist/',
         },
     },
 });
