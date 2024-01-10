@@ -17,6 +17,7 @@ export default defineConfig({
             '~flatpickr': '/node_modules/flatpickr/',
             '~aos': '/node_modules/aos/',
             '~zoomist': '/node_modules/zoomist/',
+            '~swiper': '/node_modules/swiper/',
         },
     },
 });
