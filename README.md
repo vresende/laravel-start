@@ -11,3 +11,4 @@ sail up -d
 Abaixo você encontrará a documentação do projeto sendo dividido em outras páginas
 
 [Componentes Blade](./documentation/blade-components.md)
+[Plugins Js](./documentation/js-plugins.md)
