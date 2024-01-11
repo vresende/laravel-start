@@ -2,11 +2,17 @@ import './bootstrap';
 import '~bootstrap';
 import Choices from "choices.js";
 import Swiper from "swiper/bundle";
+
 window.Swiper = Swiper;
+import AOS from 'aos';
+import Flatpickr from "flatpickr";
+import {Portuguese} from "flatpickr/dist/l10n/pt.js";
+import Zoomist from "zoomist";
+import Inputmask from 'inputmask';
 document.addEventListener('DOMContentLoaded', function () {
-    var elements = document.querySelectorAll('.js-choice');
-    if (elements.length > 0) {
-        elements.forEach(function (element) {
+    var elementChoices = document.querySelectorAll('.js-choice');
+    if (elementChoices.length > 0) {
+        elementChoices.forEach(function (element) {
             new Choices(element, {
                 loadingText: 'Carregando...',
                 noResultsText: 'Nenhum resultado encontrado',
@@ -17,12 +23,8 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     }
-});
 
-import Flatpickr from "flatpickr";
-import {Portuguese} from "flatpickr/dist/l10n/pt.js";
-
-document.addEventListener('DOMContentLoaded', function () {
+// Datepicker
     var datePickers = document.querySelectorAll('.datepicker');
     datePickers.forEach(function (picker) {
         var config = {};
@@ -47,12 +49,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         new Flatpickr('.datepicker', config); // Use 'new' para criar uma nova instância
     });
-});
 
-
-//TOAST
-
-document.addEventListener('DOMContentLoaded', function() {
+// Toast
     window.addEventListener('toast', event => {
         Swal.fire({
             title: event.detail.title || 'Atenção',
@@ -65,17 +63,14 @@ document.addEventListener('DOMContentLoaded', function() {
             timerProgressBar: true,
         });
     });
-});
 
 // AOS - Animate elements html
-import AOS from 'aos';
-AOS.init();
+    AOS.init();
 
-import Zoomist from "zoomist";
-document.addEventListener('DOMContentLoaded', function () {
-    var elements = document.querySelectorAll('.zoomist-container');
-    if (elements.length > 0) {
-        elements.forEach(function (element) {
+    //zoomist
+    var elementZooms = document.querySelectorAll('.zoomist-container');
+    if (elementZooms.length > 0) {
+        elementZooms.forEach(function (element) {
             new Zoomist(element, {
                 maxScale: 4,
                 bounds: true,
@@ -86,5 +81,71 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     }
+
 });
 
+
+// Inputmask
+
+const masks = {
+    'mask-phone': '(99) 99999-9999',
+    'mask-cpf': '999.999.999-99',
+    'mask-rg': '99.999.999-9',
+    'mask-creditcard': '9999 9999 9999 9999',
+    'mask-date': '99/99/9999'
+};
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const masks = {
+        'mask-phone': '(99) 99999-9999',
+        'mask-cpf': '999.999.999-99',
+        'mask-rg': '99.999.999-9',
+        'mask-creditcard': '9999 9999 9999 9999',
+        'mask-date': '99/99/9999'
+    };
+    masks['mask-rg'] = '99.999.999-9';
+    Inputmask.extendDefinitions({
+        '9': {
+            validator: "[0-9Xx]",
+            casing: "upper" // Converte para maiúsculas
+        }
+    });
+    function applyMask(el) {
+        Inputmask.remove(el);
+        Object.keys(masks).forEach(maskClass => {
+            if (el.classList.contains(maskClass)) {
+                Inputmask(masks[maskClass]).mask(el);
+            }
+        });
+    }
+
+    function updateMasks() {
+        document.querySelectorAll('.mask-phone, .mask-cpf, .mask-rg, .mask-creditcard, .mask-date').forEach(el => {
+            applyMask(el);
+        });
+    }
+
+    // Aplica máscaras ao carregar a página
+    updateMasks();
+
+    // Observa mudanças no DOM e atualiza máscaras conforme necessário
+    const observer = new MutationObserver(mutations => {
+        mutations.forEach(mutation => {
+            if (mutation.type === 'childList') {
+                mutation.addedNodes.forEach(node => {
+                    if (node.nodeType === 1) { // Element node
+                        if (node.matches('.mask-phone, .mask-cpf, .mask-rg, .mask-creditcard, .mask-date')) {
+                            applyMask(node);
+                        }
+                    }
+                });
+            }
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                applyMask(mutation.target);
+            }
+        });
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['class'] });
+});
